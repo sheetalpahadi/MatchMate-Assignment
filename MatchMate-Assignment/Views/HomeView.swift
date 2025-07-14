@@ -8,18 +8,22 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @StateObject var viewModel: HomeViewModel = HomeViewModel()
+    
     var body: some View {
         VStack {
             Text("Profile Matches")
                 .font(.system(size: 24, weight: .semibold))
                 .frame(maxWidth: .infinity, alignment: .leading)
             ScrollView() {
-                ForEach (0 ..< 10, id: \.self) { index in
-                    ProfileCardView()
-                    if index != 9 {
-                        Spacer()
-                            .frame(height: 18)
-                    }
+                
+                ForEach (viewModel.profiles.indices, id: \.self) { index in
+                    let profilecCardViewModel = ProfileCardViewModel(person: viewModel.profiles[index])
+                    ProfileCardView(viewModel: profilecCardViewModel)
+                    Spacer()
+                        .frame(height: 18)
+                    
                 }
             }
             .scrollIndicators(.hidden)
@@ -29,6 +33,9 @@ struct HomeView: View {
         .padding(.bottom, 0)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(edges: .bottom)
+        .onAppear {
+            viewModel.fetchProfiles()
+        }
     }
 }
 

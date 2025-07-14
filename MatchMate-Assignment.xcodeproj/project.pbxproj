@@ -19,6 +19,15 @@
 		84A51E442E2525FF003ACBC3 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 84A51E432E2525FF003ACBC3 /* SDWebImageSwiftUI */; };
 		84A51E462E25260A003ACBC3 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 84A51E452E25260A003ACBC3 /* SDWebImage */; };
 		84A51E482E25260A003ACBC3 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 84A51E472E25260A003ACBC3 /* SDWebImageMapKit */; };
+		84A51E4A2E2548BD003ACBC3 /* ProfileCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A51E492E2548BD003ACBC3 /* ProfileCardViewModel.swift */; };
+		84A51E4C2E2549E5003ACBC3 /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A51E4B2E2549E5003ACBC3 /* PersonModel.swift */; };
+		84A51E4E2E2553ED003ACBC3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A51E4D2E2553ED003ACBC3 /* HomeViewModel.swift */; };
+		84A51E502E255481003ACBC3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A51E4F2E255481003ACBC3 /* NetworkManager.swift */; };
+		84A51E532E25549A003ACBC3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 84A51E522E25549A003ACBC3 /* Alamofire */; };
+		84A51E552E25549A003ACBC3 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 84A51E542E25549A003ACBC3 /* AlamofireDynamic */; };
+		84A51E572E25A5F1003ACBC3 /* FetchProfilesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A51E562E25A5F1003ACBC3 /* FetchProfilesResponse.swift */; };
+		84A51E592E25A9D4003ACBC3 /* CircularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A51E582E25A9D4003ACBC3 /* CircularButton.swift */; };
+		84A51E5B2E25AFCF003ACBC3 /* StatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A51E5A2E25AFCF003ACBC3 /* StatusButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +60,13 @@
 		84A51E2A2E2520F1003ACBC3 /* MatchMate_AssignmentUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchMate_AssignmentUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		84A51E3D2E252288003ACBC3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		84A51E412E25259F003ACBC3 /* ProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardView.swift; sourceTree = "<group>"; };
+		84A51E492E2548BD003ACBC3 /* ProfileCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardViewModel.swift; sourceTree = "<group>"; };
+		84A51E4B2E2549E5003ACBC3 /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
+		84A51E4D2E2553ED003ACBC3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		84A51E4F2E255481003ACBC3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		84A51E562E25A5F1003ACBC3 /* FetchProfilesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProfilesResponse.swift; sourceTree = "<group>"; };
+		84A51E582E25A9D4003ACBC3 /* CircularButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularButton.swift; sourceTree = "<group>"; };
+		84A51E5A2E25AFCF003ACBC3 /* StatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +75,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				84A51E462E25260A003ACBC3 /* SDWebImage in Frameworks */,
+				84A51E532E25549A003ACBC3 /* Alamofire in Frameworks */,
+				84A51E552E25549A003ACBC3 /* AlamofireDynamic in Frameworks */,
 				84A51E482E25260A003ACBC3 /* SDWebImageMapKit in Frameworks */,
 				84A51E442E2525FF003ACBC3 /* SDWebImageSwiftUI in Frameworks */,
 			);
@@ -144,6 +162,7 @@
 		84A51E372E252111003ACBC3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				84A51E4F2E255481003ACBC3 /* NetworkManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -153,6 +172,8 @@
 			children = (
 				84A51E3D2E252288003ACBC3 /* HomeView.swift */,
 				84A51E412E25259F003ACBC3 /* ProfileCardView.swift */,
+				84A51E582E25A9D4003ACBC3 /* CircularButton.swift */,
+				84A51E5A2E25AFCF003ACBC3 /* StatusButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -160,6 +181,8 @@
 		84A51E392E25211D003ACBC3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				84A51E492E2548BD003ACBC3 /* ProfileCardViewModel.swift */,
+				84A51E4D2E2553ED003ACBC3 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -167,6 +190,8 @@
 		84A51E3A2E252129003ACBC3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				84A51E4B2E2549E5003ACBC3 /* PersonModel.swift */,
+				84A51E562E25A5F1003ACBC3 /* FetchProfilesResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -191,6 +216,8 @@
 				84A51E432E2525FF003ACBC3 /* SDWebImageSwiftUI */,
 				84A51E452E25260A003ACBC3 /* SDWebImage */,
 				84A51E472E25260A003ACBC3 /* SDWebImageMapKit */,
+				84A51E522E25549A003ACBC3 /* Alamofire */,
+				84A51E542E25549A003ACBC3 /* AlamofireDynamic */,
 			);
 			productName = "MatchMate-Assignment";
 			productReference = 84A51E0A2E2520EE003ACBC3 /* MatchMate-Assignment.app */;
@@ -267,6 +294,7 @@
 			packageReferences = (
 				84A51E3F2E25257D003ACBC3 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				84A51E402E25258D003ACBC3 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				84A51E512E25549A003ACBC3 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 84A51E0B2E2520EE003ACBC3 /* Products */;
 			projectDirPath = "";
@@ -310,7 +338,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84A51E5B2E25AFCF003ACBC3 /* StatusButton.swift in Sources */,
+				84A51E4C2E2549E5003ACBC3 /* PersonModel.swift in Sources */,
 				84A51E102E2520EE003ACBC3 /* ContentView.swift in Sources */,
+				84A51E572E25A5F1003ACBC3 /* FetchProfilesResponse.swift in Sources */,
+				84A51E4E2E2553ED003ACBC3 /* HomeViewModel.swift in Sources */,
+				84A51E592E25A9D4003ACBC3 /* CircularButton.swift in Sources */,
+				84A51E4A2E2548BD003ACBC3 /* ProfileCardViewModel.swift in Sources */,
+				84A51E502E255481003ACBC3 /* NetworkManager.swift in Sources */,
 				84A51E3E2E252288003ACBC3 /* HomeView.swift in Sources */,
 				84A51E422E25259F003ACBC3 /* ProfileCardView.swift in Sources */,
 				84A51E0E2E2520EE003ACBC3 /* MatchMate_AssignmentApp.swift in Sources */,
@@ -661,6 +696,14 @@
 				minimumVersion = 3.1.3;
 			};
 		};
+		84A51E512E25549A003ACBC3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -678,6 +721,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 84A51E3F2E25257D003ACBC3 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;
+		};
+		84A51E522E25549A003ACBC3 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84A51E512E25549A003ACBC3 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		84A51E542E25549A003ACBC3 /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84A51E512E25549A003ACBC3 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
