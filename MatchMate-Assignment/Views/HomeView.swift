@@ -12,12 +12,13 @@ struct HomeView: View {
     @StateObject var viewModel: HomeViewModel = HomeViewModel()
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Text("Profile Matches")
                 .font(.system(size: 24, weight: .semibold))
                 .frame(maxWidth: .infinity, alignment: .leading)
+            Spacer()
+                .frame(height: 16)
             ScrollView() {
-                
                 ForEach (viewModel.profiles.indices, id: \.self) { index in
                     let profilecCardViewModel = ProfileCardViewModel(person: viewModel.profiles[index])
                     ProfileCardView(viewModel: profilecCardViewModel)
@@ -27,6 +28,19 @@ struct HomeView: View {
                 }
             }
             .scrollIndicators(.hidden)
+            if let errorMessage = viewModel.errorMessage {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .font(.system(size: 12, weight: .medium))
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 12.0)
+                            .fill(.white)
+                            .stroke(.teal, lineWidth: 1.0)
+                    )
+                    .padding(.bottom, 24)
+            }
         }
         .padding()
         .padding(.horizontal, 16)
