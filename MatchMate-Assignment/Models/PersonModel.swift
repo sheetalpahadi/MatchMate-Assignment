@@ -8,37 +8,54 @@
 import Foundation
 
 struct PersonModel: Codable, Hashable {
-    let id: UUID
+    let id: IDInfo?
     let name: Name?
     let location: Location?
     let picture: ProfileImage?
 
-    init(name: Name? = nil, location: Location? = nil, picture: ProfileImage? = nil) {
-        self.id = UUID()
+    init(id: IDInfo? = nil, name: Name? = nil, location: Location? = nil, picture: ProfileImage? = nil) {
+        self.id = id
         self.name = name
         self.location = location
         self.picture = picture
     }
-    
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case location
+        case picture
+    }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = UUID()
+        id = try container.decodeIfPresent(IDInfo.self, forKey: .id)
         name = try container.decodeIfPresent(Name.self, forKey: .name)
         location = try container.decodeIfPresent(Location.self, forKey: .location)
         picture = try container.decodeIfPresent(ProfileImage.self, forKey: .picture)
     }
-    
+
     static func == (lhs: PersonModel, rhs: PersonModel) -> Bool {
-        if lhs.id == rhs.id {
-            return true
-        }
-        return false
+        return lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+struct IDInfo: Codable, Hashable {
+    let name: String?
+    let value: String?
+
+    init(name: String? = nil, value: String? = nil) {
+        self.name = name
+        self.value = value
     }
 
     enum CodingKeys: String, CodingKey {
         case name
-        case location
-        case picture
+        case value
     }
 }
 
