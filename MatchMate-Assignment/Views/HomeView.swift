@@ -61,7 +61,7 @@ struct HomeView: View {
         .onAppear {
             viewModel.fetchProfiles() { isSuccess in
                 if isSuccess {
-                    ProfilesMatchStatusStore.clearAll(from: profilesMatchStatus, in: managedContext)
+//                    ProfilesMatchStatusStore.clearAll(from: profilesMatchStatus, in: managedContext)
                 }
             }
         }
