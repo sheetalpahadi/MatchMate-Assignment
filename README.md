@@ -2,13 +2,13 @@
 An app that lets you accept or decline suggested profiles for matchmaking.
 
 1. Launch the app, a list of profiles is fetched from **API: (`https://randomuser.me/api/?results=10`)**
-   A. If the fetching is successful, the profile cards are shown as a list
-   B. If the fetching fails, list is retrieved from the last cached API response and profile cards are shown.
-2. Select checkmark button to accept the profile match OR select x-mark button to decline the profile match.
-   A. The UI changes as soon as you select a status
-   B. This will save the accept/decline/no status of the profile in CoreData (persistent storage on disk)
-   C. It is intentionally added, that once a fresh set of profiles is obtained, the status is appended to the already existing list of statuses.
-   D. However the complete API response is cached, by clearing the previous cached items.
+2. If the fetching is successful, the profile cards are shown as a list
+3. If the fetching fails, list is retrieved from the last cached API response and profile cards are shown.
+4. Select checkmark button to accept the profile match OR select x-mark button to decline the profile match.
+5. The UI changes as soon as you select a status
+6. This will save the accept/decline/no status of the profile in CoreData (persistent storage on disk)
+7. It is intentionally added, that once a fresh set of profiles is obtained, the status is appended to the already existing list of statuses.
+8. However the complete API response is cached, by clearing the previous cached items.
 
 **Approaches used:**
 1. For network calls, **Alamofire** is used.
