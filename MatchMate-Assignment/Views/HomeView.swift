@@ -27,23 +27,13 @@ struct HomeView: View {
                 ForEach (viewModel.profiles.indices, id: \.self) { index in
                     let profileCardViewModel = ProfileCardViewModel(person: viewModel.profiles[index])
                     ProfileCardView(viewModel: profileCardViewModel, didAccept: {
-                        if let profileId = profileCardViewModel.person.id?.value {
-                            deleteProfileMatchStatus(for: profileId)
-                            saveProfileMatchStatus(profileId: profileId, matchStatus: "accepted", firstName: profileCardViewModel.person.name?.first ?? "")
-                            
-                        }
+                        setStatusAccepted(for: profileCardViewModel)
                     }, didDecline: {
-                        if let profileId = profileCardViewModel.person.id?.value {
-                            deleteProfileMatchStatus(for: profileId)
-                            saveProfileMatchStatus(profileId: profileId, matchStatus: "declined", firstName: profileCardViewModel.person.name?.first ?? "")
-                            
-                        }
+                        setStatusDeclined(for: profileCardViewModel)
                     })
-                        .onAppear {
-                            if let profileId = profileCardViewModel.person.id?.value {
-                                saveProfileMatchStatus(profileId: profileId, matchStatus: profileCardViewModel.profileMatchStatus.rawValue, firstName: profileCardViewModel.person.name?.first ?? "")
-                            }
-                        }
+                    .onAppear {
+                        setStatusNone(for: profileCardViewModel)
+                    }
                     Spacer()
                         .frame(height: 18)
                 }
@@ -71,49 +61,35 @@ struct HomeView: View {
         .onAppear {
             viewModel.fetchProfiles() { isSuccess in
                 if isSuccess {
-                    clearAllProfileMatchStatus()
+                    ProfilesMatchStatusStore.clearAll(from: profilesMatchStatus, in: managedContext)
                 }
             }
         }
     }
     
-    func saveProfileMatchStatus(profileId: String, matchStatus: String, firstName: String) {
-       let newProfile = ProfileMatchStatus(context: self.managedContext)
-        newProfile.profileId = profileId
-        newProfile.matchStatus = matchStatus
-        newProfile.firstName = firstName
-
-       do {
-         try self.managedContext.save()
-       } catch {
-         print(error.localizedDescription)
-       }
-     }
-
-     func deleteProfileMatchStatus(for profileId: String) {
-       for profile in profilesMatchStatus {
-           if profile.profileId == profileId {
-               managedContext.delete(profile)
-           }
-       }
-       do {
-         try managedContext.save()
-       } catch {
-         print(error.localizedDescription)
-       }
-     }
-    
-    func clearAllProfileMatchStatus() {
-        for profile in profilesMatchStatus {
-            managedContext.delete(profile)
+    func setStatusAccepted(for profileCardViewModel: ProfileCardViewModel) {
+        if let profileId = profileCardViewModel.person.id?.value {
+            ProfilesMatchStatusStore.delete(profileId: profileId, from: profilesMatchStatus, in: managedContext)
+            ProfilesMatchStatusStore.save(profileId: profileId, matchStatus: "accepted", firstName: profileCardViewModel.person.name?.first ?? "", in: managedContext)
         }
-      do {
-        try managedContext.save()
-      } catch {
-        print(error.localizedDescription)
-      }
     }
-
+    
+    
+    func setStatusDeclined(for profileCardViewModel: ProfileCardViewModel) {
+        if let profileId = profileCardViewModel.person.id?.value {
+            ProfilesMatchStatusStore.delete(profileId: profileId, from: profilesMatchStatus, in: managedContext)
+            ProfilesMatchStatusStore.save(profileId: profileId, matchStatus: "declined", firstName: profileCardViewModel.person.name?.first ?? "", in: managedContext)
+        }
+    }
+    
+    
+    func setStatusNone(for profileCardViewModel: ProfileCardViewModel) {
+        if let profileId = profileCardViewModel.person.id?.value {
+            ProfilesMatchStatusStore.delete(profileId: profileId, from: profilesMatchStatus, in: managedContext)
+            ProfilesMatchStatusStore.save(profileId: profileId, matchStatus: profileCardViewModel.profileMatchStatus.rawValue, firstName: profileCardViewModel.person.name?.first ?? "", in: managedContext)
+        }
+    }
+  
 }
 
 #Preview {
