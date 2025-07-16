@@ -109,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				84388A8D2E277A55009699FC /* ProfilesMatchResultsStore.swift */,
+				84388A852E26FA50009699FC /* ProfilesMatchStatus.xcdatamodeld */,
 			);
 			path = CoreDataFiles;
 			sourceTree = "<group>";
@@ -143,7 +144,6 @@
 				84A51E372E252111003ACBC3 /* Utilities */,
 				84A51E0D2E2520EE003ACBC3 /* MatchMate_AssignmentApp.swift */,
 				84A51E0F2E2520EE003ACBC3 /* ContentView.swift */,
-				84388A852E26FA50009699FC /* ProfilesMatchStatus.xcdatamodeld */,
 				84A51E112E2520F0003ACBC3 /* Assets.xcassets */,
 				84A51E132E2520F0003ACBC3 /* Preview Content */,
 			);
@@ -774,8 +774,7 @@
 				84388A862E26FA50009699FC /* ProfilesMatchStatus.xcdatamodel */,
 			);
 			currentVersion = 84388A862E26FA50009699FC /* ProfilesMatchStatus.xcdatamodel */;
-			name = ProfilesMatchStatus.xcdatamodeld;
-			path = Views/ProfilesMatchStatus.xcdatamodeld;
+			path = ProfilesMatchStatus.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -22,10 +22,15 @@ class HomeViewModel: ObservableObject {
         isLoading = true
         errorMessage = nil
         
-        NetworkManager.shared.fetchProfiles() { result in
+        NetworkManager.shared.fetchProfiles() { result, isFromCache in
             self.isLoading = false
             switch result {
             case .success(let profilesResponse):
+                if isFromCache {
+                    self.errorMessage = "Failed to fetch results due to some issues"
+                } else {
+                    self.errorMessage = nil
+                }
                 self.profiles = profilesResponse.results
                 completion(true)
             case .failure(let error):
