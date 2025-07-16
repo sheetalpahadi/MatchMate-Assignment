@@ -18,7 +18,7 @@ class HomeViewModel: ObservableObject {
         self.profiles = profiles
     }
     
-    func fetchProfiles() {
+    func fetchProfiles(completion: @escaping (Bool) -> Void) {
         isLoading = true
         errorMessage = nil
         
@@ -27,9 +27,11 @@ class HomeViewModel: ObservableObject {
             switch result {
             case .success(let profilesResponse):
                 self.profiles = profilesResponse.results
+                completion(true)
             case .failure(let error):
                 self.errorMessage = error.localizedDescription
                 print("Failed to load user profile:", error)
+                completion(false)
             }
         }
     }

@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 struct PersonModel: Codable, Hashable {
     let id: IDInfo?
     let name: Name?

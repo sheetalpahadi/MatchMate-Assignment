@@ -6,15 +6,15 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct HomeView: View {
     
     @StateObject var viewModel: HomeViewModel = HomeViewModel()
     @Environment(\.managedObjectContext) var managedContext
-    @FetchRequest(entity: Profile.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Profile.firstname, ascending: true)])
-    var fetchedProfiles: FetchedResults<Profile>
-    @State var firstName: String = ""
-    @State var lastName: String = ""
+    @FetchRequest(entity: ProfileMatchStatus.entity(), sortDescriptors: [])
+
+    var profilesMatchStatus: FetchedResults<ProfileMatchStatus>
     
     var body: some View {
         VStack(spacing: 0) {
@@ -25,11 +25,27 @@ struct HomeView: View {
                 .frame(height: 16)
             ScrollView() {
                 ForEach (viewModel.profiles.indices, id: \.self) { index in
-                    let profilecCardViewModel = ProfileCardViewModel(person: viewModel.profiles[index])
-                    ProfileCardView(viewModel: profilecCardViewModel)
+                    let profileCardViewModel = ProfileCardViewModel(person: viewModel.profiles[index])
+                    ProfileCardView(viewModel: profileCardViewModel, didAccept: {
+                        if let profileId = profileCardViewModel.person.id?.value {
+                            deleteProfileMatchStatus(for: profileId)
+                            saveProfileMatchStatus(profileId: profileId, matchStatus: "accepted", firstName: profileCardViewModel.person.name?.first ?? "")
+                            
+                        }
+                    }, didDecline: {
+                        if let profileId = profileCardViewModel.person.id?.value {
+                            deleteProfileMatchStatus(for: profileId)
+                            saveProfileMatchStatus(profileId: profileId, matchStatus: "declined", firstName: profileCardViewModel.person.name?.first ?? "")
+                            
+                        }
+                    })
+                        .onAppear {
+                            if let profileId = profileCardViewModel.person.id?.value {
+                                saveProfileMatchStatus(profileId: profileId, matchStatus: profileCardViewModel.profileMatchStatus.rawValue, firstName: profileCardViewModel.person.name?.first ?? "")
+                            }
+                        }
                     Spacer()
                         .frame(height: 18)
-                    
                 }
             }
             .scrollIndicators(.hidden)
@@ -53,44 +69,51 @@ struct HomeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(edges: .bottom)
         .onAppear {
-            viewModel.fetchProfiles()
-            firstName = "Sheetal"
-            lastName = "Pahadi"
-            addProfile()
+            viewModel.fetchProfiles() { isSuccess in
+                if isSuccess {
+                    clearAllProfileMatchStatus()
+                }
+            }
         }
     }
     
-    func addProfile() {
-       let newProfile = Profile(context: self.managedContext)
-        newProfile.firstname = firstName
-        newProfile.lastname = lastName
+    func saveProfileMatchStatus(profileId: String, matchStatus: String, firstName: String) {
+       let newProfile = ProfileMatchStatus(context: self.managedContext)
+        newProfile.profileId = profileId
+        newProfile.matchStatus = matchStatus
+        newProfile.firstName = firstName
 
        do {
          try self.managedContext.save()
        } catch {
          print(error.localizedDescription)
        }
-
-       cleanupInputs()
      }
 
-     func deleteProfile(at offsets: IndexSet) {
-       for index in offsets {
-         let profile = fetchedProfiles[index]
-         managedContext.delete(profile)
+     func deleteProfileMatchStatus(for profileId: String) {
+       for profile in profilesMatchStatus {
+           if profile.profileId == profileId {
+               managedContext.delete(profile)
+           }
        }
-
        do {
          try managedContext.save()
        } catch {
          print(error.localizedDescription)
        }
      }
+    
+    func clearAllProfileMatchStatus() {
+        for profile in profilesMatchStatus {
+            managedContext.delete(profile)
+        }
+      do {
+        try managedContext.save()
+      } catch {
+        print(error.localizedDescription)
+      }
+    }
 
-     private func cleanupInputs() {
-       firstName = ""
-       lastName = ""
-     }
 }
 
 #Preview {

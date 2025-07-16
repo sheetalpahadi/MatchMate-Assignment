@@ -12,6 +12,8 @@ import SDWebImageSwiftUI
 struct ProfileCardView: View {
     
     @StateObject var viewModel: ProfileCardViewModel
+    var didAccept: (() -> Void)? = nil
+    var didDecline: (() -> Void)? = nil
     
     var body: some View {
         if viewModel.profileMatchStatus == .none {
@@ -42,10 +44,12 @@ struct ProfileCardView: View {
             HStack(spacing: 24) {
                 CircularButton(systemImageName: "xmark", buttonType: .destructive) {
                     viewModel.profileMatchStatus = .declined
+                    didDecline?()
                     print("declined")
                 }
                 CircularButton(systemImageName: "checkmark", buttonType: .primary) {
                     viewModel.profileMatchStatus = .accepted
+                    didAccept?()
                     print("accepted")
                 }
             }

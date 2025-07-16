@@ -22,7 +22,7 @@ struct MatchMate_AssignmentApp: App {
 }
 
 class PersistenceController: ObservableObject {
-  let container = NSPersistentContainer(name: "FetchedProfiles")
+  let container = NSPersistentContainer(name: "ProfilesMatchStatus")
 
   static let shared = PersistenceController()
 
